@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alfred.ski.mapper.skiMapper">
+  <resultMap id="BaseResultMap" type="com.alfred.ski.domain.ski">
+    <id column="skinumber" jdbcType="VARCHAR" property="skinumber" />
+    <result column="skitype" jdbcType="VARCHAR" property="skitype" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="rentprice" jdbcType="DOUBLE"
+            property="rentprice" />
+    <result column="deposit" jdbcType="DOUBLE" property="deposit" />
+    <result column="isrenting" jdbcType="INTEGER"
+            property="isrenting" />
+    <result column="description" jdbcType="VARCHAR"
+            property="description" />
+    <result column="skiimg" jdbcType="VARCHAR" property="skiimg" />
+    <result column="createtime" jdbcType="TIMESTAMP"
+            property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    skinumber, skitype, color, price, rentprice, deposit, isrenting, description,
+    skiimg,
+    createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bus_ski
+    where skinumber = #{skinumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bus_ski
+    where skinumber = #{skinumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.alfred.ski.domain.ski">
+    insert into bus_ski (skinumber, skitype, color,
+    price, rentprice, deposit,
+    isrenting, description, skiimg,
+    createtime)
+    values (#{skinumber,jdbcType=VARCHAR}, #{skitype,jdbcType=VARCHAR},
+    #{color,jdbcType=VARCHAR},
+    #{price,jdbcType=DOUBLE}, #{rentprice,jdbcType=DOUBLE}, #{deposit,jdbcType=DOUBLE},
+    #{isrenting,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR},
+    #{skiimg,jdbcType=VARCHAR},
+    #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective"
+          parameterType="com.alfred.ski.domain.ski">
+    insert into bus_ski
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skinumber != null">
+        skinumber,
+      </if>
+      <if test="skitype != null">
+        skitype,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="rentprice != null">
+        rentprice,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="isrenting != null">
+        isrenting,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="skiimg != null">
+        skiimg,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skinumber != null">
+        #{skinumber,jdbcType=VARCHAR},
+      </if>
+      <if test="skitype != null">
+        #{skitype,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="rentprice != null">
+        #{rentprice,jdbcType=DOUBLE},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="isrenting != null">
+        #{isrenting,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="skiimg != null">
+        #{skiimg,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective"
+          parameterType="com.alfred.ski.domain.ski">
+    update bus_ski
+    <set>
+      <if test="skitype != null">
+        skitype = #{skitype,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="rentprice != null">
+        rentprice = #{rentprice,jdbcType=DOUBLE},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="isrenting != null">
+        isrenting = #{isrenting,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="skiimg != null">
+        skiimg = #{skiimg,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where skinumber = #{skinumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey"
+          parameterType="com.alfred.ski.domain.ski">
+    update bus_ski
+    set skitype = #{skitype,jdbcType=VARCHAR},
+    color = #{color,jdbcType=VARCHAR},
+    price = #{price,jdbcType=DOUBLE},
+    rentprice = #{rentprice,jdbcType=DOUBLE},
+    deposit = #{deposit,jdbcType=DOUBLE},
+    isrenting = #{isrenting,jdbcType=INTEGER},
+    description = #{description,jdbcType=VARCHAR},
+    skiimg = #{skiimg,jdbcType=VARCHAR},
+    createtime = #{createtime,jdbcType=TIMESTAMP}
+    where skinumber = #{skinumber,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 查询 -->
+  <select id="queryAllski" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bus_ski
+    <where>
+      <if test="skinumber!=null and skinumber!=''">
+        and skinumber like concat("%",#{skinumber},"%")
+      </if>
+      <if test="skitype!=null and skitype!=''">
+        and skitype like concat("%",#{skitype},"%")
+      </if>
+      <if test="color!=null and color!=''">
+        and color like concat("%",#{color},"%")
+      </if>
+      <if test="description!=null and description!=''">
+        and description like concat("%",#{description},"%")
+      </if>
+      <if test="isrenting!=null">
+        and isrenting=#{isrenting}
+      </if>
+    </where>
+  </select>
+</mapper>
